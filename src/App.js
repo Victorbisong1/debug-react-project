@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import ProfileCard from './ProfileCard';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    person: {
+      fullName: 'Ada Lovelace',
+      bio: 'A mathematician and writer known for her work on early computing.',
+      imgSrc: '/myphoto9.png',
+      profession: 'Mathematician'
+    },
+    shows: true
+  };
+
+  toggleProfile = () => {
+    this.setState(state => ({ shows: !state.shows }));
+  };
+
+  render() {
+    return (
+      <main>
+        <h1>Profile</h1>
+        <button onClick={this.toggleProfile}>
+          {this.state.shows ? 'Hide profile' : 'Show profile'}
+        </button>
+
+        {this.state.shows && (
+          <ProfileCard person={this.state.person} />
+        )}
+      </main>
+    );
+  }
 }
 
 export default App;
